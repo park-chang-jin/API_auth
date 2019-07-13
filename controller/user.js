@@ -1,6 +1,6 @@
 const userModel = require('../models/user');
 const jwt = require('jsonwebtoken');
-const keys = require('../config/keys');
+const { JWT_SECRET } = require('../config');
 
 
 
@@ -10,10 +10,8 @@ signToken = user => {
         sub: user.id,
         lat: new Date().getTime,
         exp: new Date().setDate(new Date().getDate() + 1)
-    }, keys.secretOrkey);
+    }, JWT_SECRET);
 };
-
-
 
 
 module.exports = {
@@ -22,7 +20,6 @@ module.exports = {
     // async: 속도가 개선되게 비동기화 해주는것!
     signup: async(req, res) => {
        const { name, email, password } = req.value.body;
-
 
        userModel
         .findOne({ email })
@@ -54,13 +51,29 @@ module.exports = {
         .catch(err => res.json(err));
     },
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     login: async(req, res) => {
         
     },
 
     secret: async(req, res) => {
+        // res.status(200).json({
+        //     msg: 'secet!!'
+        // });
         res.status(200).json({
-            msg: 'secet!!'
+            secret: 'Successful!'
         });
     }
 

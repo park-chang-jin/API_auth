@@ -1,8 +1,21 @@
 const express = require('express');
 const router = require('express-promise-router')();
+const passport = require('passport');
+const passportConfig = require('../passport');
+
+
 const {validateBody, scheams} = require('../helper/routerhelpers');
 
 const userController = require('../controller/user');
+
+
+
+
+
+
+
+
+
 
 // @route POST /user/signup
 // @desc Create user / 기존 = router.post('/login', (req, res) => {})
@@ -17,6 +30,6 @@ router.route('/login').post(validateBody(scheams.loginSchema),userController.log
 // @route POST /user/secret
 // @desc sectet
 // @access Public
-router.route('/secret').get(userController.secret);
+router.route('/secret').get(passport.authenticate('jwt', { session: false }),userController.secret);
 
 module.exports = router;

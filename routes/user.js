@@ -4,7 +4,7 @@ const router = require('express-promise-router')();
 const userController = require('../controller/user');
 
 // @route POST /user/signup
-// @desc Create user
+// @desc Create user / 기존 = router.post('/login', (req, res) => {})
 // @access Public
 router.route('/signup').post(userController.signup);
 

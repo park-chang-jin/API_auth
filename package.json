@@ -1,0 +1,28 @@
+{
+  "name": "api_auth",
+  "version": "1.0.0",
+  "description": "API_auth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/park-chang-jin/API_auth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/park-chang-jin/API_auth/issues"
+  },
+  "homepage": "https://github.com/park-chang-jin/API_auth#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

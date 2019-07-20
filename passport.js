@@ -2,8 +2,10 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
-const { JWT_SECRET } = require('./config');
+const config = require('./config');
 const userModel = require('./models/user');
+const GooglePlusTokenStrategy = require('passport-google-plus-token');
+
 
 // JSON WEB TOKEN STRATEGY
 passport.use(new JwtStrategy({
@@ -54,3 +56,42 @@ passport.use(new LocalStrategy({
     }
 
 }));
+
+// Google auth Strategy
+passport.use('googleToken', new GooglePlusTokenStrategy({
+    clientID: config.oauth.google.clientID,
+    clientSercet: config.oauth.google.clientSecret
+}, async (accessToken, refreshToken, profile, done) => {
+    
+    try {
+        
+        console.log('profile', profile);
+        console.log('accessToken', accessToken);
+        console.log('refreshToken', refreshToken);
+
+        const existingUser = await userModel.findOne({ 'googole.id': profile.id });
+        if (existingUser) {
+            return done(null, existingUser);
+        }
+        const newUser = new userModel({
+            method: 'google',
+            google: {
+                id: profile.id,
+                email: profile.emails[0].value,
+                name: profile.displayName
+            }
+
+        });
+
+        await newUser.save();
+        done(null, newUser);
+
+        
+
+    } catch (error) {
+        done(error, false, error.message);
+    }
+
+}));
+
+// Facebook oauth Strategy

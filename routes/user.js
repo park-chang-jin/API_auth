@@ -23,6 +23,10 @@ router.route('/signup').post(validateBody(scheams.signupSchema), userController.
 // @access Public
 router.route('/login').post(validateBody(scheams.loginSchema), passportSignIn, userController.login);
 
+router.route('/oauth/google').post(passport.authenticate('googleToken', { session: false }), userController.googleAuth);
+
+
+
 // @route POST /user/secret
 // @desc sectet
 // @access Public

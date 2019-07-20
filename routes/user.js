@@ -8,12 +8,8 @@ const {validateBody, scheams} = require('../helper/routerhelpers');
 
 const userController = require('../controller/user');
 
-
-
-
-
-
-
+const authCheck = passport.authenticate('jwt', { session: false });
+const passportSignIn = passport.authenticate('local', { session: false });
 
 
 
@@ -25,11 +21,11 @@ router.route('/signup').post(validateBody(scheams.signupSchema), userController.
 // @route POST /user/login
 // @desc user login
 // @access Public
-router.route('/login').post(validateBody(scheams.loginSchema),userController.login);
+router.route('/login').post(validateBody(scheams.loginSchema), passportSignIn, userController.login);
 
 // @route POST /user/secret
 // @desc sectet
 // @access Public
-router.route('/secret').get(passport.authenticate('jwt', { session: false }),userController.secret);
+router.route('/secret').get(authCheck, userController.secret);
 
 module.exports = router;

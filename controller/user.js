@@ -7,7 +7,7 @@ const { JWT_SECRET } = require('../config');
 signToken = user => {
     return jwt.sign({
         iss: 'ckdwls',
-        sub: user.id,
+        sub: user._id,
         lat: new Date().getTime,
         exp: new Date().setDate(new Date().getDate() + 1)
     }, JWT_SECRET);
@@ -56,12 +56,23 @@ module.exports = {
     },
 
 
+<<<<<<< HEAD
     login: async(req, res) => {
         const token = signToken(req.user);
+=======
+
+
+
+    login: async(req, res) => {
+        console.log('여기오냐?111');
+        const token = signToken(req.user);
+        console.log('여기오냐?222');
+>>>>>>> master
         res.status(200).json({
             result: "Successful Login",
             tokenInfo: 'Bearer ' + token
         })
+<<<<<<< HEAD
     },
 
     googleAuth: async(req,res) => {
@@ -71,6 +82,8 @@ module.exports = {
             result: "Sucessful googleLogin",
             tokenInfo: 'Bearer ' + token
         });
+=======
+>>>>>>> master
     },
 
     secret: async(req, res) => {

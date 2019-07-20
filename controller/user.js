@@ -56,10 +56,6 @@ module.exports = {
     },
 
 
-<<<<<<< HEAD
-    login: async(req, res) => {
-        const token = signToken(req.user);
-=======
 
 
 
@@ -67,23 +63,18 @@ module.exports = {
         console.log('여기오냐?111');
         const token = signToken(req.user);
         console.log('여기오냐?222');
->>>>>>> master
         res.status(200).json({
             result: "Successful Login",
             tokenInfo: 'Bearer ' + token
         })
-<<<<<<< HEAD
     },
 
-    googleAuth: async(req,res) => {
-        console.log('Google Successful');
+    facebookOatuh: async(req, res) => {
         const token = signToken(req.user);
         res.status(200).json({
-            result: "Sucessful googleLogin",
-            tokenInfo: 'Bearer ' + token
+            reuslt: 'Sucesful Login',
+            tokenInof: 'Bearer ' + token
         });
-=======
->>>>>>> master
     },
 
     secret: async(req, res) => {
